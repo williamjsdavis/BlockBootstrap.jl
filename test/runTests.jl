@@ -1,4 +1,7 @@
 # Unit testing
+#=
+TODO: Add comparison tests
+=#
 using Test
 using Random
 include("getTestData.jl")
