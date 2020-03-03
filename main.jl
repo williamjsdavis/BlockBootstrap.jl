@@ -26,8 +26,14 @@ display(plt1);
 statisticHandle = mean;
 
 # bootstrapStatistic(data, statisticHandle, bootstrapSampleHandle, blockLength, Nblocks, NbootstrapReplicates)
-fullDataEstimate, replicateEstimate = bootstrapStatistic(testData, statisticHandle, MBBsample, 10, 5, 200);
+fullDataEstimate, replicateEstimate, resampleIndexBB, resampleDataBB = bootstrapStatistic(testData, statisticHandle, MBBsample, 10, 5, 200);
 
 plt2 = plot(replicateEstimate);
 plot!(fullDataEstimate*ones(size(replicateEstimate)));
 display(plt2);
+
+# Plot resampled indexes
+plt3 = plot(index);
+plot!(resampleIndexBB[1]);
+plot!(resampleIndexBB[2]);
+display(plt3);

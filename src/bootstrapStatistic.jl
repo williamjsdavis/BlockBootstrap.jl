@@ -10,5 +10,5 @@ function bootstrapStatistic(data, statisticHandle, bootstrapSampleHandle, blockL
         for ii in 1:NbootstrapReplicates
                 replicateEstimate[ii] = statisticHandle(resampleDataBB[ii]);
         end
-        return fullDataEstimate, replicateEstimate
+        return fullDataEstimate, replicateEstimate, resampleIndexBB, resampleDataBB
 end
