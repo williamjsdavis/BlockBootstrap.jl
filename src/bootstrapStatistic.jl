@@ -1,28 +1,14 @@
-function bootstrapStatistic(data, chosenStatistic, Nresample)
-    # Resamples and funs statistic on each sample
+# Pass samples to statistic
+function bootstrapStatistic(data, statisticHandle, bootstrapSampleHandle, blockLength, Nblocks, NbootstrapReplicates)
+        # Bootstrap a statistic
+        fullDataEstimate = statisticHandle(testData);
+        estimateType = typeof(fullDataEstimate);
 
-    Ndata = length(xSample);
+        resampleIndexBB, resampleDataBB = bootstrapSampleHandle(testData, blockLength, Nblocks, NbootstrapReplicates);
 
-    randomDraw() = rand(1:Ndata, Ndata, 1)
-
-    #Single bootstrap
-    indices, estimatedParameterBootstrap = singleSample(data, randomDraw, chosenStatistic);
-
-    println(string(estimatedParameterBootstrap))
-
-    # Multiple bootstrap samples
-    parameterVector = Vector{Float64}(undef,Nresample);
-    indicesVector = Vector{Any}(undef,Nresample);
-    for n in 1:Nresample
-        indicesVector[n], parameterVector[n] = singleSample(data, randomDraw, chosenStatistic);
-    end
-
-    return (indicesVector, parameterVector);
-end
-function singleSample(data, randomDraw, chosenStatistic)
-    # Single bootstrap sample
-    indices = randomDraw();
-    bootstrapSample = data[indices];
-    estimatedParameterBootstrap = chosenStatistic(bootstrapSample);
-    return (indices, estimatedParameterBootstrap)
+        replicateEstimate = Vector{estimateType}(undef, NbootstrapReplicates);
+        for ii in 1:NbootstrapReplicates
+                replicateEstimate[ii] = statisticHandle(resampleDataBB[ii]);
+        end
+        return fullDataEstimate, replicateEstimate
 end
