@@ -6,9 +6,9 @@ include("src/bootstrapSampling.jl")
 include("src/bootstrapStatistic.jl")
 
 # Get test data
-n = 55;
+n = 50;
 index = 1:n;
-testData = getTestDataLinearFloats(n);
+testData = getTestDataPrimeInts(n);
 
 # Resample test data
 # MBBsample(data, blockLength, Nblocks, NbootstrapReplicates)
@@ -25,12 +25,20 @@ display(plt1);
 # E.g. mean
 statisticHandle = mean;
 
+# Statistical estimate
+theoryEstimate = std(testData)/sqrt(n);
+
 # bootstrapStatistic(data, statisticHandle, bootstrapSampleHandle, blockLength, Nblocks, NbootstrapReplicates)
-fullDataEstimate, replicateEstimate, resampleIndexBB, resampleDataBB = bootstrapStatistic(testData, statisticHandle, MBBsample, 10, 5, 200);
+fullDataEstimate, replicateEstimate, resampleIndexBB, resampleDataBB = bootstrapStatistic(testData, statisticHandle, MBBsample, 1, 50, 200);
 
 plt2 = plot(replicateEstimate);
 plot!(fullDataEstimate*ones(size(replicateEstimate)));
 display(plt2);
+
+# Statistics
+bootEstSdotM = std(replicateEstimate);
+println(bootEstSdotM)
+println(theoryEstimate)
 
 # Plot resampled indexes
 plt3 = plot(index);
