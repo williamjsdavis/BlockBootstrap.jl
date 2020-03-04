@@ -9,16 +9,10 @@ include("testFunctions.jl")
 include("../src/bootstrapSampling.jl")
 
 function main()
-    # Test settings
-    blockLength = 10;
-    Nblocks = 5;
-    NbootstrapReplicates = 2;
-    Ndata = 500;
-
     # Testing
     println("Starting Bootstrap tests")
 
-    testAllData(Ndata, blockLength, Nblocks, NbootstrapReplicates)
+    testAllCases()
 
     println("Tests finished")
 end
