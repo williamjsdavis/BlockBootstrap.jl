@@ -8,7 +8,7 @@ include("src/bootstrapStatistic.jl")
 # Get test data
 n = 50;
 index = 1:n;
-testData = getTestDataPrimeInts(n);
+testData = getTestDataLinearFloats(n);
 
 # Resample test data
 # MBBsample(data, blockLength, Nblocks, NbootstrapReplicates)
