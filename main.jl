@@ -29,7 +29,7 @@ statisticHandle = mean;
 theoryEstimate = std(testData)/sqrt(n);
 
 # bootstrapStatistic(data, statisticHandle, bootstrapSampleHandle, blockLength, Nblocks, NbootstrapReplicates)
-fullDataEstimate, replicateEstimate, resampleIndexBB, resampleDataBB = bootstrapStatistic(testData, statisticHandle, MBBsample, 1, 50, 200);
+fullDataEstimate, replicateEstimate, resampleIndexBB, resampleDataBB = bootstrapStatistic(testData, statisticHandle, MBBsample, 1, 200);
 
 plt2 = plot(replicateEstimate);
 plot!(fullDataEstimate*ones(size(replicateEstimate)));
