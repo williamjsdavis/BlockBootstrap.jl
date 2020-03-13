@@ -1,7 +1,7 @@
 # Bootstrap sampling functions
 using Random
 
-function MBBsample(data::Array{<:Real,1}, blockLength::Int64, Nblocks::Int64, NbootstrapReplicates::Int64)
+function MBBsample(data::Array{<:Real,1}, blockLength::Unsigned, Nblocks::Unsigned, NbootstrapReplicates::Unsigned)
     # Moving Block Bootstrap
     # X = data
     # n = Ndata
@@ -18,7 +18,7 @@ function MBBsample(data::Array{<:Real,1}, blockLength::Int64, Nblocks::Int64, Nb
 
     return resampleIndex, resampleData
 end
-function NBBsample(data::Array{<:Real,1}, blockLength::Int64, Nblocks::Int64, NbootstrapReplicates::Int64)
+function NBBsample(data::Array{<:Real,1}, blockLength::Unsigned, Nblocks::Unsigned, NbootstrapReplicates::Unsigned)
     # Nonoverlapping Block Bootstrap
     # X = data
     # n = Ndata
@@ -35,7 +35,7 @@ function NBBsample(data::Array{<:Real,1}, blockLength::Int64, Nblocks::Int64, Nb
     resampleIndex, resampleData = multipleSample(data, possibleIndex, NbootstrapReplicates, blockLength, Nblocks, bootDataLength, Ndata);
     return resampleIndex, resampleData
 end
-function CBBsample(data::Array{<:Real,1}, blockLength::Int64, Nblocks::Int64, NbootstrapReplicates::Int64)
+function CBBsample(data::Array{<:Real,1}, blockLength::Unsigned, Nblocks::Unsigned, NbootstrapReplicates::Unsigned)
     # Circular Block Bootstrap
     # X = data
     # n = Ndata
@@ -51,7 +51,7 @@ function CBBsample(data::Array{<:Real,1}, blockLength::Int64, Nblocks::Int64, Nb
     resampleIndex, resampleData = multipleSample(data, possibleIndex, NbootstrapReplicates, blockLength, Nblocks, bootDataLength, Ndata);
     return resampleIndex, resampleData
 end
-function multipleSample(data::Array{<:Real,1}, possibleIndex::Array{<:Int,1}, NbootstrapReplicates::Int64, blockLength::Int64, Nblocks::Int64, bootDataLength::Int64, Ndata::Int64)
+function multipleSample(data::Array{<:Real,1}, possibleIndex::Array{<:Int,1}, NbootstrapReplicates::Unsigned, blockLength::Int64, Nblocks::Unsigned, bootDataLength::Unsigned, Ndata::Int64)
     # Multiple block bootstrap sample
     # X = data
     # n = Ndata
@@ -68,7 +68,7 @@ function multipleSample(data::Array{<:Real,1}, possibleIndex::Array{<:Int,1}, Nb
     end
     return resampleIndex, resampleData
 end
-function singleSampleIndex(bootDataLength::Int64, Nblocks::Int64, blockLength::Int64, possibleIndex::Array{<:Int,1}, Ndata::Int64)
+function singleSampleIndex(bootDataLength::Unsigned, Nblocks::Unsigned, blockLength::Unsigned, possibleIndex::Array{<:Int,1}, Ndata::Unsigned)
     # Single bootsrap sample
     # X = data
     # n = Ndata
