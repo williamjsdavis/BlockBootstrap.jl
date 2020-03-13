@@ -1,6 +1,7 @@
 # Unit testing
 #=
 TODO: Add comparison tests
+TODO: Add bootstrapStatistic tests
 =#
 using Test
 using Random
