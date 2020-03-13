@@ -1,10 +1,10 @@
 # Pass samples to statistic
 function bootstrapStatistic(data, statisticHandle, bootstrapSampleHandle, blockLength, Nblocks, NbootstrapReplicates)
         # Bootstrap a statistic
-        fullDataEstimate = statisticHandle(testData);
+        fullDataEstimate = statisticHandle(data);
         estimateType = typeof(fullDataEstimate);
 
-        resampleIndexBB, resampleDataBB = bootstrapSampleHandle(testData, blockLength, Nblocks, NbootstrapReplicates);
+        resampleIndexBB, resampleDataBB = bootstrapSampleHandle(data, blockLength, Nblocks, NbootstrapReplicates);
 
         replicateEstimate = Vector{estimateType}(undef, NbootstrapReplicates);
         for ii in 1:NbootstrapReplicates
