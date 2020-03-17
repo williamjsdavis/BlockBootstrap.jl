@@ -13,7 +13,7 @@ Details of theory to be added.
 There are many notebook example of how to use the package in the `./notebooks/` directory. 
 
 ### Short example
-Take a time-series observation, such as a realization of the Ornstein-Uhlenbeck stochastic differential equation,
+This example is mostly from `./notebooks/BootstrapSDE.ipynb`. For a time-series observation, such as a realization of the Ornstein-Uhlenbeck stochastic differential equation,
 
 ![equation](https://latex.codecogs.com/gif.latex?du&space;=&space;-\alpha&space;u&space;dt&space;&plus;&space;\beta&space;dW_t.)
 
