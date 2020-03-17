@@ -1,4 +1,3 @@
-# Pass samples to statistic
 function bootstrapStatistic(data::Array{<:Real,1}, statisticHandle::Function, bootstrapSampleHandle::Function, blockLength::Integer, NbootstrapReplicates::Integer)
         # Bootstrap a statistic
         fullDataEstimate = statisticHandle(data);
@@ -8,8 +7,10 @@ function bootstrapStatistic(data::Array{<:Real,1}, statisticHandle::Function, bo
         Ndata = length(data);
         Nblocks = ceil(Int, Ndata/blockLength);
 
+        # Sampling
         resampleIndexBB, resampleDataBB = bootstrapSampleHandle(data, blockLength, Nblocks, NbootstrapReplicates);
 
+        # Statistic on samples
         replicateEstimate = Vector{estimateType}(undef, NbootstrapReplicates);
         for ii in 1:NbootstrapReplicates
                 replicateEstimate[ii] = statisticHandle(resampleDataBB[ii]);

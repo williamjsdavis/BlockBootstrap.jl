@@ -9,7 +9,6 @@ k = Nblocks
 B = NbootstrapReplicates
 m = bootDataLength
 =#
-using Random
 function MBBsample(data::Array{<:Real,1}, blockLength::Integer, Nblocks::Integer, NbootstrapReplicates::Integer)
     # Moving Block Bootstrap
     Ndata = length(data);

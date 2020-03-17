@@ -1,9 +1,11 @@
 ## Main script
+using BlockBootstrap
 using Plots
 using Statistics
+using Random
 include("test/getTestData.jl")
-include("src/bootstrapSampling.jl")
-include("src/bootstrapStatistic.jl")
+#include("src/bootstrapSampling.jl")
+#include("src/bootstrapStatistic.jl")
 
 # Get test data
 n = 50;
