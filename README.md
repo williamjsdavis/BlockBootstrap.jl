@@ -53,7 +53,7 @@ The output `fullDataEstimate` is the estimate of the statistics, and `replicateE
 
 # Changelog
 
-- Version 0.9 - Introduced version Maggie and I made for group meetings.
+- Version 0.1.0 - Introduced version Maggie and I made for group meetings.
 
 # References
 
