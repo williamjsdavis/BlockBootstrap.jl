@@ -141,7 +141,7 @@ function samplingTest(samplingFunctionHandle, testData, blockLength, Nblocks, Nb
         @testset "Output type" begin
             @test all(x->x<:Array, typeof.(resampleIndexBB))
             @test all(x->x<:Array, typeof.(resampleDataBB))
-            @test typeof(resampleIndexBB[1][1]) <: Unsigned
+            @test typeof(resampleIndexBB[1][1]) <: Integer
             @test typeof(resampleDataBB[1][1]) <: Real
             @test resampleDataBB[1][1] isa testDataType
         end
