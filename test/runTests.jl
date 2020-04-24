@@ -12,11 +12,8 @@ include("getTestData.jl")
 include("testFunctions.jl")
 
 function main()
-    # Testing
     println("Starting Bootstrap tests")
-
     testAllCases()
-
     println("Tests finished")
 end
 

@@ -8,34 +8,31 @@ function testAllCases()
     end
 end
 function smallTest()
-    # Small test
-    blockLength = 10;
-    Nblocks = 5;
-    NbootstrapReplicates = 2;
-    Ndata = 500;
-    statisticHandle = mean;
+    blockLength = 10
+    Nblocks = 5
+    NbootstrapReplicates = 2
+    Ndata = 500
+    statisticHandle = mean
     @testset "Small test     " begin
         testAllData(Ndata, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     end
 end
 function mediumTest()
-    # Medium test
-    blockLength = 40;
-    Nblocks = 10;
-    NbootstrapReplicates = 400;
-    Ndata = 5000;
-    statisticHandle = mean;
+    blockLength = 40
+    Nblocks = 10
+    NbootstrapReplicates = 400
+    Ndata = 5000
+    statisticHandle = mean
     @testset "Medium test    " begin
         testAllData(Ndata, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     end
 end
 function bigTest()
-    # Big test
-    blockLength = 500;
-    Nblocks = 100;
-    NbootstrapReplicates = 10000;
-    Ndata = 50000;
-    statisticHandle = mean;
+    blockLength = 500
+    Nblocks = 100
+    NbootstrapReplicates = 10000
+    Ndata = 50000
+    statisticHandle = mean
     @testset "Big test       " begin
         testAllData(Ndata, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     end
@@ -43,23 +40,19 @@ end
 function testAllData(Ndata, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     # Testing different data sources
     @testset "Linear integers" begin
-        testDataLinearInts = getTestDataLinearInts(Ndata);
-        #testAllSamplingMethods(testDataLinearInts, blockLength, Nblocks, NbootstrapReplicates)
+        testDataLinearInts = getTestDataLinearInts(Ndata)
         allTestTypes(testDataLinearInts, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     end
     @testset "Random integers" begin
-        testDataRandomInts = getTestDataRandomInts(Ndata);
-        #testAllSamplingMethods(testDataPrimeInts, blockLength, Nblocks, NbootstrapReplicates)
+        testDataRandomInts = getTestDataRandomInts(Ndata)
         allTestTypes(testDataRandomInts, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     end
     @testset "Linear floats  " begin
-        testDataLinearFloats = getTestDataLinearFloats(Ndata);
-        #testAllSamplingMethods(testDataLinearFloats, blockLength, Nblocks, NbootstrapReplicates)
+        testDataLinearFloats = getTestDataLinearFloats(Ndata)
         allTestTypes(testDataLinearFloats, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     end
 end
 function allTestTypes(testData, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
-    # Sampling tests and statistic tests
     @testset "Sampling tests" begin
         testAllSamplingMethods(testData, blockLength, Nblocks, NbootstrapReplicates)
     end
@@ -83,18 +76,18 @@ function testAllStatisticMethods(testData, statisticHandle, blockLength, Nbootst
 end
 function statisticTest(samplingFunctionHandle, testData, statisticHandle, blockLength, NbootstrapReplicates)
     # Testing statistics functions
-    dataLength = length(testData);
+    dataLength = length(testData)
 
     # Define bootstrap tests
-    handleStringIn = string(typeof(samplingFunctionHandle).name.mt.name);
-    stringToPrint = "Sampling function " * handleStringIn;
+    handleStringIn = string(typeof(samplingFunctionHandle).name.mt.name)
+    stringToPrint = "Sampling function " * handleStringIn
 
     @testset "$stringToPrint" begin
         # Set the seed
         Random.seed!(1234)
 
         # Bootstrap
-        fullDataEstimate, replicateEstimate, resampleIndexBB, resampleDataBB = bootstrapStatistic(testData, statisticHandle, samplingFunctionHandle, blockLength, NbootstrapReplicates);
+        fullDataEstimate, replicateEstimate, resampleIndexBB, resampleDataBB = bootstrapStatistic(testData, statisticHandle, samplingFunctionHandle, blockLength, NbootstrapReplicates)
 
         # Tests
         @testset "Output size" begin
@@ -114,22 +107,22 @@ function statisticTest(samplingFunctionHandle, testData, statisticHandle, blockL
 end
 function samplingTest(samplingFunctionHandle, testData, blockLength, Nblocks, NbootstrapReplicates)
     # Testing sampling functions
-    testDataType = typeof(testData[1]);
-    bootDataLength = blockLength * Nblocks;
+    testDataType = typeof(testData[1])
+    bootDataLength = blockLength * Nblocks
 
     # Define bootstrap tests
-    handleStringIn = string(typeof(samplingFunctionHandle).name.mt.name);
-    stringToPrint = "Sampling function " * handleStringIn;
+    handleStringIn = string(typeof(samplingFunctionHandle).name.mt.name)
+    stringToPrint = "Sampling function " * handleStringIn
 
     @testset "$stringToPrint" begin
         # Set the seed
         Random.seed!(1234)
 
         # Resample
-        resampleIndexBB, resampleDataBB = samplingFunctionHandle(testData, blockLength, Nblocks, NbootstrapReplicates);
+        resampleIndexBB, resampleDataBB = samplingFunctionHandle(testData, blockLength, Nblocks, NbootstrapReplicates)
 
         # Get previous value
-        savedIndex = savedTestOutputs(NbootstrapReplicates, handleStringIn);
+        savedIndex = savedTestOutputs(NbootstrapReplicates, handleStringIn)
 
         # Tests
         @testset "Output size" begin
