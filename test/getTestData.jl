@@ -1,6 +1,3 @@
-# For generating test data
-# using Primes
-
 function getTestDataLinearInts(dataLength)
     firstN = Array{Int64,1}(undef, dataLength)
     for ii in 1:dataLength

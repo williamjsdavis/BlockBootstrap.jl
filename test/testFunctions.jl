@@ -1,6 +1,5 @@
 # Testing functions
 function testAllCases()
-    # Test different settings
     @testset "All tests      " begin
         smallTest()
         #mediumTest()
