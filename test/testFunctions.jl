@@ -48,9 +48,9 @@ function testAllData(Ndata, statisticHandle, blockLength, Nblocks, NbootstrapRep
         allTestTypes(testDataLinearInts, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     end
     @testset "Random integers" begin
-        testDataPrimeInts = getTestDataPrimeInts(Ndata);
+        testDataRandomInts = getTestDataRandomInts(Ndata);
         #testAllSamplingMethods(testDataPrimeInts, blockLength, Nblocks, NbootstrapReplicates)
-        allTestTypes(testDataPrimeInts, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
+        allTestTypes(testDataRandomInts, statisticHandle, blockLength, Nblocks, NbootstrapReplicates)
     end
     @testset "Linear floats  " begin
         testDataLinearFloats = getTestDataLinearFloats(Ndata);
