@@ -61,23 +61,24 @@ function allTestTypes(testData, statisticHandle, blockLength, Nblocks, Nbootstra
 end
 function testAllSamplingMethods(testData, blockLength, Nblocks, NbootstrapReplicates)
     @testset "Sampling method type" begin
-        samplingTest(MBBsample, testData, blockLength, Nblocks, NbootstrapReplicates)
-        samplingTest(NBBsample, testData, blockLength, Nblocks, NbootstrapReplicates)
-        samplingTest(CBBsample, testData, blockLength, Nblocks, NbootstrapReplicates)
+        samplingTest(MBBsampler, testData, blockLength, Nblocks, NbootstrapReplicates)
+        samplingTest(NBBsampler, testData, blockLength, Nblocks, NbootstrapReplicates)
+        samplingTest(CBBsampler, testData, blockLength, Nblocks, NbootstrapReplicates)
     end
 end
 function testAllStatisticMethods(testData, statisticHandle, blockLength, NbootstrapReplicates)
     @testset "Statistic method type" begin
-        statisticTest(MBBsample, testData, statisticHandle, blockLength, NbootstrapReplicates)
-        statisticTest(NBBsample, testData, statisticHandle, blockLength, NbootstrapReplicates)
-        statisticTest(CBBsample, testData, statisticHandle, blockLength, NbootstrapReplicates)
+        statisticTest(MBBsampler, testData, statisticHandle, blockLength, NbootstrapReplicates)
+        statisticTest(NBBsampler, testData, statisticHandle, blockLength, NbootstrapReplicates)
+        statisticTest(CBBsampler, testData, statisticHandle, blockLength, NbootstrapReplicates)
     end
 end
-function statisticTest(samplingFunctionHandle, testData, statisticHandle, blockLength, NbootstrapReplicates)
+function statisticTest(sampler, testData, statisticHandle, blockLength, NbootstrapReplicates)
     # Testing statistics functions
     dataLength = length(testData)
 
     # Define bootstrap tests
+    samplingFunctionHandle = sampler.handle
     handleStringIn = string(typeof(samplingFunctionHandle).name.mt.name)
     stringToPrint = "Sampling function " * handleStringIn
 
@@ -108,12 +109,16 @@ function statisticTest(samplingFunctionHandle, testData, statisticHandle, blockL
     end
 
 end
-function samplingTest(samplingFunctionHandle, testData, blockLength, Nblocks, NbootstrapReplicates)
+function samplingTest(sampler, testData, blockLength, Nblocks, NbootstrapReplicates)
     # Testing sampling functions
     testDataType = typeof(testData[1])
     bootDataLength = blockLength * Nblocks
 
     # Define bootstrap tests
+    #println(sampler)
+    #println(typeof(sampler))
+    #println(sampler.handle)
+    samplingFunctionHandle = sampler.handle
     handleStringIn = string(typeof(samplingFunctionHandle).name.mt.name)
     stringToPrint = "Sampling function " * handleStringIn
 
