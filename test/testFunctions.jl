@@ -115,9 +115,6 @@ function samplingTest(sampler, testData, blockLength, Nblocks, NbootstrapReplica
     bootDataLength = blockLength * Nblocks
 
     # Define bootstrap tests
-    #println(sampler)
-    #println(typeof(sampler))
-    #println(sampler.handle)
     samplingFunctionHandle = sampler.handle
     handleStringIn = string(typeof(samplingFunctionHandle).name.mt.name)
     stringToPrint = "Sampling function " * handleStringIn
