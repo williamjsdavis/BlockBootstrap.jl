@@ -4,7 +4,7 @@ struct bootstrapResult
         resampleIndexBB
         resampleDataBB
 end
-function bootstrapStatistic(data::Array{<:Real,1}, statisticHandle::Function, bootstrapSampleHandle::Function, blockLength::Integer, NbootstrapReplicates::Integer)
+function bootstrapStatistic(data::Array{<:Real,1}, statisticHandle::Function, sampler::samplingAlgorithm, blockLength::Integer, NbootstrapReplicates::Integer)
         # Bootstrap a statistic
         fullDataEstimate = statisticHandle(data)
         estimateType = typeof(fullDataEstimate)
@@ -14,6 +14,7 @@ function bootstrapStatistic(data::Array{<:Real,1}, statisticHandle::Function, bo
         Nblocks = ceil(Int, Ndata/blockLength)
 
         # Sampling
+        bootstrapSampleHandle = sampler.handle
         resampleIndexBB, resampleDataBB = bootstrapSampleHandle(data, blockLength, Nblocks, NbootstrapReplicates)
 
         # Statistic on samples

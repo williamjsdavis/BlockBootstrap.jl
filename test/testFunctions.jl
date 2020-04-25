@@ -87,7 +87,7 @@ function statisticTest(sampler, testData, statisticHandle, blockLength, Nbootstr
         Random.seed!(1234)
 
         # Bootstrap the data
-        bootstrapResult = bootstrapStatistic(testData, statisticHandle, samplingFunctionHandle, blockLength, NbootstrapReplicates)
+        bootstrapResult = bootstrapStatistic(testData, statisticHandle, sampler, blockLength, NbootstrapReplicates)
         fullDataEstimate = bootstrapResult.fullDataEstimate
         replicateEstimate = bootstrapResult.replicateEstimate
         resampleIndexBB = bootstrapResult.resampleIndexBB
