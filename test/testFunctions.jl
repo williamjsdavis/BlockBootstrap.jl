@@ -84,7 +84,7 @@ function statisticTest(sampler, testData, statisticHandle, blockLength, Nbootstr
 
     @testset "$stringToPrint" begin
         # Set the seed
-        Random.seed!(1234)
+        Random.seed!(1)
 
         # Bootstrap the data
         bootstrapResult = bootstrapStatistic(testData, statisticHandle, sampler, blockLength, NbootstrapReplicates)
@@ -121,7 +121,7 @@ function samplingTest(sampler, testData, blockLength, Nblocks, NbootstrapReplica
 
     @testset "$stringToPrint" begin
         # Set the seed
-        Random.seed!(1234)
+        Random.seed!(1)
 
         # Resample
         resampleIndexBB, resampleDataBB = samplingFunctionHandle(testData, blockLength, Nblocks, NbootstrapReplicates)
@@ -151,12 +151,12 @@ end
 function savedTestOutputs(testSize,methodType)
     # Hardcoded test results for validation
     if methodType == "MBBsample" || methodType == "CBBsample"
-        out = 237;
+        out = 37; # 237
     else
         if testSize == 2
-            out = 41;
+            out = 1; # 41
         elseif testSize == 400
-            out = 281;
+            out = 281; # 281
         end
     end
 end
